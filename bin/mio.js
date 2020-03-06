@@ -14,7 +14,6 @@ var config = require("../package.json");
 // 短标志可以作为单个arg传递;
 // 例如node bin/mio -imk = node bin/mio -i -m -k;
 // program
-//   .version(config.version, "-v, --version")
 //   .option("-i, --init [name]", "init something", 'myApp')
 //   .option("-g, --go", "to start a server, for development")
 //   .option("-k, --k-on", "to build")
@@ -22,9 +21,11 @@ var config = require("../package.json");
 
 // 可选参数 <dir> [options]（<>必填 []选填）;
 program
+  .version(config.version, "-v, --version")
   .usage("[command] [options]")
   .command("init [name]", "init project")
-  .command("go [options]", "to start a server, for development");
+  .command("go [options]", "to start a server, for development")
+  .command("k-on [options]", "to build, for production");
 
 program.parse(process.argv);
 
