@@ -18,7 +18,7 @@ const getDefaultConfig = env => {
       filename: "[name].js",
       path: output
         ? path.resolve(cwd, output)
-        : path.resolve(__dirname, "../dist")
+        : path.resolve(".", "./dist")
     },
     plugins: dev ? [new logPlugin({ showWords: true, showEvent: false })] : []
   };
