@@ -15,6 +15,7 @@ const runWebpackDevServer = program => {
       hasErr(err, stats);
     } // 成功回调
   );
+  if (module && module.hot) module.hot.accept();
 };
 
 const hasErr = (err, stats) => {

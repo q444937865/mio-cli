@@ -19,36 +19,45 @@ module.exports = {
     })
   ],
   module: {
-    rules: [{
+    rules: [
+      {
         test: /.(js|jsx)$/,
         // include: [path.resolve(__dirname, '../src')],
-        loader: 'babel-loader',
+        loader: "babel-loader",
         options: {
-          plugins: ['syntax-dynamic-import'],
-          presets: [
-            [ '@babel/preset-env', { modules: false } ]
-          ]
+          plugins: ["syntax-dynamic-import"],
+          presets: [["@babel/preset-env", { modules: false }]]
         },
         exclude: /node_modules/
       },
       {
-        test: /\.css$/, // 解析css
-        use: ['style-loader', 'css-loader']
+        test: /\.(le|c)ss$/, // 解析css
+        use: ["style-loader", "css-loader", "less-loader"]
       },
       {
         test: /\.(jpe?g|png|gif)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 8192,
-            outputPath: 'images/'
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+              outputPath: "images/"
+            }
           }
-        }]
+        ]
       },
       {
         test: /\.(htm|html)$/,
-        use: 'html-withimg-loader'
-      },
+        use: "html-withimg-loader"
+      }
     ]
+  },
+  resolve: {
+    //从左到右依次查找这样配置之后，我们 import Dialog from 'dialog'，会去先寻找 ./src/components/dialog
+    modules: ["./src/components", "node_modules"],
+    // 别名
+    alias: {
+      "@": "./src"
+    }
   }
 };
