@@ -31,3 +31,5 @@ module.exports = merge(common, {
   },
   mode: 'development'
 });
+
+if (module && module.hot) module.hot.accept();

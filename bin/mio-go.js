@@ -3,10 +3,18 @@
 const program = require("commander");
 const webpack = require("webpack");
 const webpackDevServer = require("webpack-dev-server");
+const merge = require("webpack-merge");
 const devServerConfig = require("./mio.dev");
 
 const runWebpackDevServer = program => {
-  const compiler = webpack(devServerConfig);
+  let runConfig = devServerConfig;
+  if (program.config) {
+    const userConfig = require(path.resolve("./", program.config));
+    const newConfig =
+      typeof userConfig == "function" ? userConfig() : userConfig;
+    runConfig = merge.smart(devServerConfig, newConfig);
+  }
+  const compiler = webpack(runConfig);
   const server = new webpackDevServer(compiler, { open: true, noInfo: true });
   server.listen(
     devServerConfig.devServer.port,
@@ -15,7 +23,6 @@ const runWebpackDevServer = program => {
       hasErr(err, stats);
     } // 成功回调
   );
-  if (module && module.hot) module.hot.accept();
 };
 
 const hasErr = (err, stats) => {
