@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const path = require("path");
 const program = require("commander");
 const webpack = require("webpack");
 const webpackDevServer = require("webpack-dev-server");
