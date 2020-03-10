@@ -18,8 +18,8 @@ const runWebpackDevServer = program => {
   const compiler = webpack(runConfig);
   const server = new webpackDevServer(compiler, { open: true, noInfo: true });
   server.listen(
-    devServerConfig.devServer.port,
-    devServerConfig.devServer.host,
+    runConfig.devServer.port,
+    runConfig.devServer.host,
     (err, stats) => {
       hasErr(err, stats);
     } // 成功回调
