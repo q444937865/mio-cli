@@ -23,7 +23,8 @@ module.exports = merge(common, {
     open: true, // 自动打开浏览器
     hot: true, // 开启热更新
     overlay: true, // 浏览器页面上显示错误
-    noInfo: true
+    noInfo: true,
+    historyApiFallback: true // BrowserRouter
     // 代理
     // proxy: {
     //   "/api": "http://localhost:4000"
