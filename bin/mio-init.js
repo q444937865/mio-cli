@@ -25,7 +25,11 @@ const startDown = (answers, program) => {
   const { name, type } = answers;
   let url = "direct:https://gitee.com/zz_418/react-zz.git#master";
   // github可以省略前面，如 "q444937865/react-zz"
-  if (type == "vue") url = "";
+  if (type == "vue") {
+    url = "";
+    console.log("暂无vue模板..如果你能提供..");
+    return;
+  }
   download(url, name, { clone: true }, err => {
     if (err) {
       spinner.fail();
@@ -45,9 +49,7 @@ const mio = program => {
   });
 };
 
-program
-  .option("-d, --description [des]", "change the description of package.")
-  .parse(process.argv);
+program.option("-d, --description [des]", "change the description of package.").parse(process.argv);
 
 const questions = [
   {

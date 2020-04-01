@@ -11,9 +11,11 @@ const runWebpackDevServer = program => {
   let runConfig = devServerConfig;
   if (program.config) {
     const userConfig = require(path.resolve("./", program.config));
-    const newConfig =
-      typeof userConfig == "function" ? userConfig() : userConfig;
+    const newConfig = typeof userConfig == "function" ? userConfig() : userConfig;
     runConfig = merge.smart(devServerConfig, newConfig);
+  }
+  if (program.entry) {
+    runConfig = merge.smart(runConfig, { entry: { mio: program.entry } });
   }
   const compiler = webpack(runConfig);
   const server = new webpackDevServer(compiler, { open: true, noInfo: true });

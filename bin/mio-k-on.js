@@ -11,7 +11,6 @@ const runWebpackDevServer = program => {
   } else {
     webpack(proConfig).run((err, stats) => {
       hasErr(err, stats);
-      console.log("\n build success.");
     });
   }
 };
@@ -24,6 +23,7 @@ const hasErr = (err, stats) => {
   const info = stats.toJson();
   if (stats.hasErrors()) console.error(info.errors);
   if (stats.hasWarnings()) console.warn(info.warnings);
+  console.log("\n build success.");
 };
 
 const mio = program => {
